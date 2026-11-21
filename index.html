@@ -77,8 +77,23 @@ h1{font-size:2.1rem;text-align:center;margin:10px 0 0;text-shadow:0 1px 0 #c9a,0
 .opt:not(:disabled):hover{transform:none;box-shadow:0 6px 0 #b9a8f0}
 .lc:not(.f):hover>div{transform:none}
 .q,.q.ar,.opt,.lc .s{text-shadow:none!important}
+
+html,body{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+html{background:#5b2bb8}
+body{background-attachment:scroll;min-height:100vh;min-height:100dvh}
+#bg,#fx{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+#bg{z-index:0}#fx{z-index:8}
+.fl,.run,.cf{position:absolute}
+.msg{overflow:hidden}
+.wrap{perspective:none}
+.card{transform-style:flat}
+.opts{grid-auto-rows:1fr}
+.opt{transform:none!important;transform-style:flat;min-height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;-webkit-user-select:none;user-select:none}
+.opt:active{box-shadow:0 6px 0 #b9a8f0}
+.btn:hover{transform:none}
+.q{min-height:3.4em;display:flex;align-items:center;justify-content:center;flex-direction:column}
 </style></head><body>
-<div id="bg"></div>
+<div id="bg"></div><div id="fx"></div>
 <div class="msg" id="msg"><b class="ar" id="m1"></b><small id="m2"></small></div>
 <div class="wrap" id="app"></div>
 <script>
@@ -110,8 +125,8 @@ let mode='quiz',qs=[],i=0,sc=0,lock=false,ctx;
 function say(t,r){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ar-SA';u.rate=r||.85;speechSynthesis.speak(u)}catch(e){}}
 function beep(f){try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();f.forEach((x,k)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=x;o.type='triangle';o.connect(g);g.connect(ctx.destination);const t=ctx.currentTime+k*.12;g.gain.setValueAtTime(.2,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.start(t);o.stop(t+.3)})}catch(e){}}
 function show(a,b){$('m1').textContent=a;$('m2').textContent=b;const m=$('msg');m.classList.remove('on');void m.offsetWidth;m.classList.add('on')}
-function celebrate(){const r=document.createElement('div');r.className='run';r.textContent=RUN[Math.random()*RUN.length|0];document.body.appendChild(r);setTimeout(()=>r.remove(),2700);
-for(let k=0;k<22;k++){const c=document.createElement('div');c.className='cf';c.textContent=['⭐','🎉','🎈','✨','🦋'][k%5];c.style.left=Math.random()*100+'%';c.style.animationDelay=Math.random()*.5+'s';document.body.appendChild(c);setTimeout(()=>c.remove(),2600)}}
+function celebrate(){const r=document.createElement('div');r.className='run';r.textContent=RUN[Math.random()*RUN.length|0];$('fx').appendChild(r);setTimeout(()=>r.remove(),2700);
+for(let k=0;k<22;k++){const c=document.createElement('div');c.className='cf';c.textContent=['⭐','🎉','🎈','✨','🦋'][k%5];c.style.left=Math.random()*100+'%';c.style.animationDelay=Math.random()*.5+'s';$('fx').appendChild(c);setTimeout(()=>c.remove(),2600)}}
 function bg(){$('bg').innerHTML=['🐘','🦜','🚗','🐒','🚌','🦋','🚂','🐢','🦁','✈️','🐠','🚁'].map((e,k)=>`<span class="fl" style="left:${(k*8.7+3)%95}%;top:${(k*23+5)%88}%;animation-delay:${k*.6}s">${e}</span>`).join('')}
 function home(){
  A.innerHTML=`<h1>🌟 അറബിക് ക്വിസ് ഗെയിം 🌟</h1><div class="sub">കളിച്ച് പഠിക്കാം! സെറ്റ് തിരഞ്ഞെടുക്കൂ</div>
