@@ -73,6 +73,10 @@ h1{font-size:2.1rem;text-align:center;margin:10px 0 0;text-shadow:0 1px 0 #c9a,0
 .lc{animation:in3d .6s ease-out backwards}.lc:not(.f):hover>div{transform:rotateY(10deg) rotateX(5deg)}
 .msg b{animation:sway 1s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+.card,.q.ar,.opt,.opt.ok,.opt.no,.lc{animation:none!important}
+.opt:not(:disabled):hover{transform:none;box-shadow:0 6px 0 #b9a8f0}
+.lc:not(.f):hover>div{transform:none}
+.q,.q.ar,.opt,.lc .s{text-shadow:none!important}
 </style></head><body>
 <div id="bg"></div>
 <div class="msg" id="msg"><b class="ar" id="m1"></b><small id="m2"></small></div>
@@ -136,7 +140,7 @@ function end(){const n=qs.length,p=sc/n;
 function learn(k){const L=k<0?ALL:S[k][2].map(q=>({q:q[0],a:q[1],e:S[k][0]}));
  A.innerHTML=`<div class="top"><button class="btn" style="padding:6px 12px" onclick="home()">🏠</button><span>📖 ${k<0?'എല്ലാം':S[k][1]}</span><span>${L.length}</span></div><div class="hint" style="margin:0 0 12px">കാർഡിൽ തൊട്ടാൽ ഉത്തരം കാണാം · 🔊 ശബ്ദം</div>`+
  L.map((x,n)=>`<div class="lc" onclick="this.classList.toggle('f');say(this.classList.contains('f')?'${x.a.replace(/'/g,'')}':'${x.q.replace(/'/g,'')}')"><div><div class="s fr ar"><div>${x.e} ${n+1}. ${x.q}</div>${ml(x.q)}</div><div class="s bk ar"><div>${x.a}</div>${ml(x.a)}</div></div></div>`).join('')}
-function tilt(){const c=$('cd');if(!c)return;document.onmousemove=e=>{if(!$('cd'))return;const x=(e.clientX/innerWidth-.5)*8,y=(e.clientY/innerHeight-.5)*-8;c.style.transform=`perspective(900px) rotateY(${x}deg) rotateX(${y}deg)`}}
+function tilt(){return;const c=$('cd');if(!c)return;document.onmousemove=e=>{if(!$('cd'))return;const x=(e.clientX/innerWidth-.5)*8,y=(e.clientY/innerHeight-.5)*-8;c.style.transform=`perspective(900px) rotateY(${x}deg) rotateX(${y}deg)`}}
 const _q=quiz;quiz=function(k){window.last=k;_q(k)};
 bg();home();
 </script></body></html>
